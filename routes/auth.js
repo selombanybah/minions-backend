@@ -14,15 +14,12 @@ router.route("/register").post(registerUser);
 
 // router.route("/me").get(isAuthenticatedUser, getUserProfile);
 
-router.route("/admin/users").get(allUsers);
+router.route("/profiles").get(allUsers);
 
 router.route("/admin/user/:id").get(getUserDetails);
 router.route("/me/update/:id").put(updateProfile);
+router.route("/profile/:id").get(getUserDetails);
 
-router
-  .route("/admin/user/:id")
-  .get(getUserDetails)
-  .put(updateUser)
-  .delete(deleteUser);
+router.route("/admin/user/:id").delete(deleteUser);
 
 module.exports = router;

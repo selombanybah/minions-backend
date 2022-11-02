@@ -17,7 +17,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
       crop: "scale",
     });
 
-    console.log("req.body", req.body);
     user = await User.create({
       name,
       email,
@@ -80,7 +79,6 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 });
 // Update user profile => /api/v1/admin/user/:id
 exports.updateUser = catchAsyncErrors(async (req, res, next) => {
-  console.log("req.body", req.body);
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
@@ -120,7 +118,6 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
 // Get user details => /api/v1/admin/user/:id
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  console.log({ user: !!user.avatar.public_id });
 
   if (!user) {
     return next(
@@ -142,7 +139,6 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
 // Update user profile => /api/v1/me/update
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
-  console.log("req.body", req.body);
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
