@@ -7,7 +7,8 @@ const cloudinary = require("cloudinary");
 
 // Register a user => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, phoneNumber } = req.body;
+  const { name, email, phoneNumber, description, role } = req.body;
+  console.log({ description });
   let user;
 
   if (req.body.avatar) {
@@ -25,14 +26,22 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
         public_id: result.public_id,
         url: result.secure_url,
       },
+      description,
+      role,
     });
   } else {
     user = await User.create({
       name,
       email,
       phoneNumber,
+      description,
+      role,
     });
   }
+  res.status(200).json({
+    success: true,
+    user,
+  });
 });
 
 // Get currently logged in user details  => /api/v1/message
@@ -83,6 +92,8 @@ exports.updateUser = catchAsyncErrors(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
+    description: req.body.description,
+    role: req.body.role,
   };
 
   // Update avatar
@@ -143,6 +154,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
+    description: req.body.description,
+    role: req.body.role,
   };
 
   // Update avatar

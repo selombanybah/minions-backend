@@ -33,9 +33,13 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    default: "user",
+    default: "Developer",
   },
-
+  description: {
+    type: String,
+    required: false,
+    // minLength: [30, "Your name cannot exceed 30 characters"],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
